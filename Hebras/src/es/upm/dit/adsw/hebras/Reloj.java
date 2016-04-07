@@ -17,6 +17,12 @@ public class Reloj {
 		Sonido sonido = new Sonido();
 		hora.start();                        // ... y las arranca
 		sonido.start();
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			System.out.println(e.toString());
+		}
+		hora.detener();
 	}
 
 }
