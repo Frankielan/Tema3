@@ -4,15 +4,13 @@ package es.upm.dit.adsw.buffer;
  * Interfaz genérica para tampones (buffers)
  * 
  * @author jpuente
- * @version 20.03.2013
+ * @version 07.04.2016
  * 
  * @param <E> tipo de elementos que se envían a través del buffer
  */
 public interface Buffer<E> {
 	
-	void enviar(E dato) 
-			throws InterruptedException;
+	void enviar(E dato);
 	
-	E recibir() 
-			throws InterruptedException;
+	E recibir();
 }

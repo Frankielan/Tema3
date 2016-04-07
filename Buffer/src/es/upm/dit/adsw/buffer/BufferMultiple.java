@@ -4,7 +4,7 @@ package es.upm.dit.adsw.buffer;
  * Buffer con capacidad para varios elementos
  * 
  * @author jpuente
- * @version 20120320
+ * @version 07.04.2016
  */
 public class BufferMultiple <E> implements Buffer<E> {
 
@@ -26,23 +26,29 @@ public class BufferMultiple <E> implements Buffer<E> {
 		this.almacen = (E[]) new Object[n];
 	}
 
-	public synchronized void enviar(E dato) 
-			throws InterruptedException {
-		while (n >= nmax) wait();     // espera que haya sitio
+	public synchronized void enviar(E dato) {
+		try {
+			while (n >= nmax)
+				wait(); // espera que haya sitio
+		} catch (InterruptedException ignored) {
+		}
 		almacen[in] = dato;
-		in = ++in%nmax;
+		in = ++in % nmax;
 		n++;
-		notifyAll();              // avisa de que hay un valor
+		notifyAll(); // avisa de que hay un valor
 	}
 
-	public synchronized E recibir() 
-			throws InterruptedException {
+	public synchronized E recibir() {
 		E dato = null;
-		while (n <= 0) wait(); // espera que haya un valor
+		try {
+			while (n <= 0)
+				wait(); // espera que haya un valor
+		} catch (InterruptedException ignored) {
+		}
 		dato = almacen[out];
-		out = ++out%nmax;
+		out = ++out % nmax;
 		n--;
-		notifyAll();          // avisa de que hay sitio
+		notifyAll(); // avisa de que hay sitio
 		return dato;
 	}
 
