@@ -5,27 +5,27 @@ package es.upm.dit.adsw.puentesencillo;
  * @date 20150323
  *
  * Este monitor trata de gestionar el acceso a un puente. El puente
- * s�lo tiene cabida para un coche, no importa en qu� direcci�n vaya. 
- * Para entrar o salir del puente se emplean los m�todos de la clase.
+ * sólo tiene cabida para un coche, no importa en qué dirección vaya. 
+ * Para entrar o salir del puente se emplean los métodos de la clase.
  */
 
 public class GestorPuenteSencillo {
 
 	/**
-	 * Indica si hay alg�n coche en el puente
+	 * Indica si hay algún coche en el puente
 	 */
 	private boolean hayCocheEnPuente = false;
 
 	/**
-	 * Este m�todo lo invocan los coche cuando quieren entrar en el puente.
-	 * Si el puente est� ocupado, se bloquean.
+	 * Este método lo invocan los coche cuando quieren entrar en el puente.
+	 * Si el puente está ocupado, se bloquean.
 	 * 
-	 * @param idCoche Este par�metro indica el identificador del 
-	 * coche que realiza la operaci�n. S�lo se usa para generar trazas
+	 * @param idCoche Este parámetro indica el identificador del 
+	 * coche que realiza la operación. Sólo se usa para generar trazas
 	 * 
-	 * @throws InterruptedException Esta excepci�n se eleva si se ejecuta 
-	 * el m�todo "interrupt" de una hebra mientras est� bloqueada. En este
-	 * caso, la excepci�n no se trata localmente y se delega en la hebra 
+	 * @throws InterruptedException Esta excepción se eleva si se ejecuta 
+	 * el método "interrupt" de una hebra mientras está bloqueada. En este
+	 * caso, la excepción no se trata localmente y se delega en la hebra 
 	 * su tratamiento 
 	 */
 	public synchronized void entrarPuente(int idCoche) throws InterruptedException {
@@ -44,17 +44,17 @@ public class GestorPuenteSencillo {
 	}
 
 	/**
-	 * Este m�todo lo invocan los coches al salir del puente.
+	 * Este método lo invocan los coches al salir del puente.
 	 * 
-	 * @param idCoche Este par�metro indica el identificador del 
-	 * coche que realiza la operaci�n. S�lo se usa para generar trazas
+	 * @param idCoche Este parámetro indica el identificador del 
+	 * coche que realiza la operación. Sólo se usa para generar trazas
 	 */
 	public synchronized void salirPuente(int idCoche){
 		hayCocheEnPuente = false;
 		// En este caso es suficiente con poner notify, ya que
-		// s�lo hay una condici�n por la que todos las hebras se 
-		// bloquean. Si se pone "notifyAll" el c�digo ser�a correcto, 
-		// pero m�s ineficiente
+		// sólo hay una condición por la que todos las hebras se 
+		// bloquean. Si se pone "notifyAll" el código sería correcto, 
+		// pero menos eficiente
 		notify();
 
 		System.out.println("<<<< El coche " + idCoche + 
