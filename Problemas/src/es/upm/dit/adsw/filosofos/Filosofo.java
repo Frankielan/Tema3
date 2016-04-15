@@ -6,7 +6,7 @@ import java.util.Random;
  * Filósofo
  * 
  * @author jpuente
- * @version 30.10.2014
+ * @version 2016.04.15
  */
 public class Filosofo extends Thread {
 

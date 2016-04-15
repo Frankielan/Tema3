@@ -4,7 +4,7 @@ package es.upm.dit.adsw.filosofos;
  * Palillo
  * 
  * @author jpuente
- * @version 30.10.2014
+ * @version 2016.04.15
  */
 public class Palillo {
 
@@ -18,22 +18,21 @@ public class Palillo {
 
 	/**
 	 * Toma el palillo
-	 * 
-	 * @throws InterruptedException
 	 */
-	public synchronized void toma() throws InterruptedException {
-		while (ocupado)
-			wait();
+	public synchronized void toma() {
+		try {
+			while (ocupado)
+				wait();
+		} catch (InterruptedException ignored) {
+		}
 		System.out.println("Palillo " + id + " ocupado");
 		ocupado = true;
 	}
 
 	/**
 	 * Deja el palillo en la mesa
-	 * 
-	 * @throws InterruptedException
 	 */
-	public synchronized void deja() throws InterruptedException {
+	public synchronized void deja() {
 		ocupado = false;
 		System.out.println("Palillo " + id + " libre");
 		notifyAll();
